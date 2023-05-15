@@ -109,5 +109,37 @@ public class MemberDAO {
 		return mVo;
 
 	}
+	
+	// 사용자 정보 수정 기능
+	public int updateMember(MemberVO mVo){
+		
+		int result = -1;
+		
+		String sql = "UPDATE MEMBER SET PWD =?, EMAIL=?, PHONE=?, ADMIN=? WHERE USERID=?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, mVo.getPwd());
+			pstmt.setString(2, mVo.getEmail());
+			pstmt.setString(3, mVo.getPhone());
+			pstmt.setInt(4, mVo.getAdmin());
+			pstmt.setString(5, mVo.getUserid());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+		
+	}
+	
 
 }
