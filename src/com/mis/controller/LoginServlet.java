@@ -53,7 +53,9 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO 
+		// TODO 회원 인증 기능 -> 회원 인증하면 main.jsp 이동, 실패하면 login.jsp로 이동
+		
+		
 		
 	}
 
