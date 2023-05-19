@@ -80,7 +80,7 @@ public class MemberDAO {
 	public MemberVO getMember(String userid) {
 		MemberVO mVo = null;
 		String sql = "SELECT * FROM MEMBER WHERE USERID=?";
-		
+
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -109,37 +109,65 @@ public class MemberDAO {
 		return mVo;
 
 	}
-	
+
 	// 사용자 정보 수정 기능
-	public int updateMember(MemberVO mVo){
-		
+	public int updateMember(MemberVO mVo) {
+
 		int result = -1;
-		
+
 		String sql = "UPDATE MEMBER SET PWD =?, EMAIL=?, PHONE=?, ADMIN=? WHERE USERID=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
-			
+
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			
+
 			pstmt.setString(1, mVo.getPwd());
 			pstmt.setString(2, mVo.getEmail());
 			pstmt.setString(3, mVo.getPhone());
 			pstmt.setInt(4, mVo.getAdmin());
 			pstmt.setString(5, mVo.getUserid());
-			
+
 			result = pstmt.executeUpdate();
-			
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return result;
+
+	}
+
+	// 회원가입
+	public int insertMember(MemberVO mVo) {
+
+		int result = -1;
+	    String sql = "INSERT INTO MEMBER (USERID, PWD, EMAIL, PHONE, ADMIN) VALUES (?, ?, ?, ?, ?)";
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+
+	    try {
+	        conn = getConnection();
+	        pstmt = conn.prepareStatement(sql);
+
+	        pstmt.setString(1, mVo.getUserid());
+	        pstmt.setString(2, mVo.getPwd());
+	        pstmt.setString(3, mVo.getEmail());
+	        pstmt.setString(4, mVo.getPhone());
+	        pstmt.setInt(5, mVo.getAdmin());
+
+	        result = pstmt.executeUpdate();
+	    } catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	    return result;   
+	}
+	
+	public void confiirmID(MemberVO mVo) {
 		
 	}
 	
-
 }
