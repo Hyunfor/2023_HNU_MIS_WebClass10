@@ -76,5 +76,14 @@ public class MemberUpdateServlet extends HttpServlet {
 		response.sendRedirect("login.do");
 		
 	}
+	
+	// 회원가입 과제
+	// MemberDAO (method 2개 추가)
+			// confiirmID() (중복확인가능)
+			// insertMember() (회원가입기능)
+	// Servlet 2개 추가
+	// IdCheckServlet - > doGet(중복확인)
+	// JoinServlet  - > doGet - > 회원가입페이지 이동.
+				// - > doPost - > 회원가입
 
 }
