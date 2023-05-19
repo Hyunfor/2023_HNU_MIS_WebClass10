@@ -33,8 +33,11 @@ public class JoinServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// 회원가입 페이지로 이동합니다.
+		String url = "member/join.jsp";
+		
+        RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+        dispatcher.forward(request, response);
 	}
 
 	/**
@@ -43,8 +46,6 @@ public class JoinServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO 
-		String url = "member/join.jsp";
 
 		// 사용자가 입력한 정보 request 객체 받아오기
 		String name = request.getParameter("name");
@@ -72,8 +73,8 @@ public class JoinServlet extends HttpServlet {
 
 		// 회원가입 성공 시 메시지를 설정합니다.
 		String message = "회원가입이 완료되었습니다.";
-		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-		dispatcher.forward(request, response);
+		// 페이지 이동
+		response.sendRedirect("login.do");
 
 	}
 
