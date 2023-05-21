@@ -145,7 +145,7 @@ public class MemberDAO {
 	// 회원가입
 	public int insertMember(MemberVO mVo) {
 		int result = -1;
-		String sql = "INSERT INTO MEMBER (USERID, PWD, EMAIL, PHONE, ADMIN) VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO MEMBER VALUES (?, ?, ?, ?, ?, ?)";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
