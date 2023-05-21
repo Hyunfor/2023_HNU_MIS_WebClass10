@@ -59,4 +59,10 @@ public class MemberVO {
 		this.admin = admin;
 	}
 
+	@Override
+	public String toString() {
+		return "MemberVO [name=" + name + ", userid=" + userid + ", pwd=" + pwd + ", email=" + email + ", phone="
+				+ phone + ", admin=" + admin + "]";
+	}
+
 }

@@ -1,6 +1,8 @@
 package com.mis.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,21 +32,22 @@ public class IdCheckServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// 체크하고자 하는 ID 값을 받아옵니다.
+		// 가입시 입력한 아이디 얻어오기
 		String userid = request.getParameter("userid");
-
-		// 아이디 중복을 체크하는 로직을 작성
-		// 필요한 경우 데이터베이스와 연동하여 아이디 중복 여부를 확인
+		
+		//DAO 객체 얻어오기.
 		MemberDAO mDao = MemberDAO.getInstance();
-		boolean isDuplicate = mDao.confiirmID(userid);
+		
+		// 아이디 중복체크를 위한 confirmID() 메소드에 아이디를 전달해 주어 결과값 가져오기.
+		int result = mDao.confiirmID(userid);
 
-		// 중복 여부에 따라 결과를 전달
-		response.setContentType("text/plain");
-		if (isDuplicate) {
-			response.getWriter().write("중복된 아이디입니다.");
-		} else {
-			response.getWriter().write("사용 가능한 아이디입니다.");
-		}
+		// 아이디 중복 체크 후 얻어온 confirmID() 메소드의 결과값을 사용자 아이디와 함께
+		// idcheck.jsp 페이지에 어트리뷰트에 실어 보내기
+		request.setAttribute("userid", userid);
+		request.setAttribute("result", result);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("member/idcheck.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**
