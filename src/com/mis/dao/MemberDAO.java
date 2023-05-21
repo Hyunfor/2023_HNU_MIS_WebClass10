@@ -188,7 +188,7 @@ public class MemberDAO {
 			pstmt.setString(1, userid);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				result = -1;
+				result = 1;
 			} else {
 				result = -1;
 			}
